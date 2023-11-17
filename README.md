@@ -63,8 +63,7 @@ Bivariate Chart
 
 This bar graph looks at the distribution of kills for each position. When result = 1, that player won the game. It appears that for the those who won games tend to have more kills than those who lost games. Support(<code class="language-plaintext highlighter-rouge">“sup”</code>) would normally defer kills to their teammates, and that is reflected as their distributions are closer to 0 than the other positions.
 
-<iframe src="increase_winrate_barchart.html" width="800" height="600" frameBorder="0"></iframe>
-
+<iframe src="increase_win_rate_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
 This bar graph shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. One thing intriguing is that the support role is the only role that had a negative difference in winrate, which we would further invesitgate in our hypothesis testing.
 
