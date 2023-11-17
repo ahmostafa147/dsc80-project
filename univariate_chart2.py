@@ -6,3 +6,5 @@ fig = (px.histogram(lol_data,
                     histnorm="probability density")
       )
 fig.show()
+
+fig.write_html("plot2.html")
