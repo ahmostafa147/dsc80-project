@@ -35,6 +35,8 @@ Descriptions of Columns
 We first decided to only keep the relevant columns: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“datacompleteness”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, <code class="language-plaintext highlighter-rouge">“teamkills”</code>, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“killsat15”</code> and <code class="language-plaintext highlighter-rouge">“date”</code> as they were relevant to our question. We cleaned the data by removing the rows that contain information about the team. We did this by removing the rows that had "team" value in the position column. We then added a new column to the DataFrame that identifies each row as whether it belongs to a position that had more kills than its counterpart in the opposing team. In order to create this column <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, we took the rows with the same <code class="language-plaintext highlighter-rouge">“gameid”</code> and <code class="language-plaintext highlighter-rouge">“position”</code> and compared the kills between the two sides. Our process is showed below:
 
 ```py
+import pandas as pd
+import numpy as np
 lol_data = pd.read_csv('lol_data.csv', usecols=["gameid", "datacompleteness", "side", "position", "kills", "teamkills", "result"])
 lol_data = lol_data.query("position != 'team'")
 red = lol_data.sort_values(by=["gameid", "position"]).query("side == 'Red'")
@@ -42,8 +44,8 @@ blue = lol_data.sort_values(by=["gameid", "position"]).query("side == 'Blue'")
 red["has_more_kills"] = np.array(red['kills']) > np.array(blue['kills'])
 blue["has_more_kills"] = np.array(red['kills']) < np.array(blue['kills'])
 col_added = red.merge(blue, how='outer').sort_values(by=["gameid", "position"])
-```
 print(col_added.head().to_markdown(index=False))
+```
 
 Univariate Charts
 
