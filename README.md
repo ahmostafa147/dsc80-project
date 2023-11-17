@@ -64,7 +64,7 @@ This bar graph shows the difference in winrate when having more kills than their
 
 Interesting Aggregates
 
-This groupby() highlights the mean number of dragons when teams lose or win. The first row is when the team loses and the second row is when the team wins. You can see the distribution between winning or losing with a particular soul. For instance you are much more likely to lose with "chemtechs" than win with it and you are more likely to win with "hextechs" than lose with them.
+This groupby() highlights the mean number of kills each position has when they lose or win. The first row is when the team loses and the second row is when the team wins. You can see the distribution of kills between losing and winning. Across all roles the winners on average have a higher number of kills than if they lose.
 
 |   result |     bot |     jng |     mid |     sup |     top |
 |---------:|--------:|--------:|--------:|--------:|--------:|
