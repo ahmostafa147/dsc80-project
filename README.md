@@ -62,6 +62,13 @@ This bar graph looks at the distribution of kills for each position. When result
 
 This bar graph shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. One thing intriguing is that the support role is the only role that had a negative difference in winrate, which we would further invesitgate in our hypothesis testing.
 
+Interesting Aggregates
+
+|     bot |     jng |     mid |     sup |     top |
+|--------:|--------:|--------:|--------:|--------:|
+| 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
+| 6.27757 | 3.46807 | 4.85156 | 1.01652 | 3.5129  |
+
 ---
 
 ## Assessment of Missingness
