@@ -144,6 +144,7 @@ Significance Level: 5% (0.05)
 * We chose this significance level because it is the standard
 p-value: 0
 * We did 10,000 simulations
+
 Conclusion: Since the p value is 0, we reject the null hypothesis. Our observations is not consistent with the hypothesis that the change in win rate for supports with more kills than their lane opponents is less than 0. We believe this means that supports having more kills may be detrimental to the team winning the game.
 
 
