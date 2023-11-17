@@ -64,10 +64,10 @@ This bar graph shows the difference in winrate when having more kills than their
 
 Interesting Aggregates
 
-|     bot |     jng |     mid |     sup |     top |
-|--------:|--------:|--------:|--------:|--------:|
-| 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
-| 6.27757 | 3.46807 | 4.85156 | 1.01652 | 3.5129  |
+|   result |     bot |     jng |     mid |     sup |     top |
+|---------:|--------:|--------:|--------:|--------:|--------:|
+|        0 | 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
+|        1 | 6.27757 | 3.46807 | 4.85156 | 1.01652 | 3.5129  |
 
 ---
 
@@ -78,9 +78,45 @@ Yes, we believe that many columns in our data are Not Missing At Random (NMAR) d
 
 Furthermore, special individual statistics were recorded differently based on the league the game took place in. It appeared that some leagues did not record the individual kill statistics in rows for the players and not the teams. <code class="language-plaintext highlighter-rouge">“killsat15”</code>, one of the individual kill statistics, we speculate will have its missingness dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column based on this fact.
 
+| league     |      False |       True |
+|:-----------|-----------:|-----------:|
+| AL         | 0.0189112  | 0          |
+| CBLOL      | 0.0264539  | 0          |
+| CBLOLA     | 0.0271098  | 0          |
+| CDF        | 0.00743332 | 0          |
+| CT         | 0.00470048 | 0          |
+| DDH        | 0.00940096 | 0          |
+| EBL        | 0.0173808  | 0          |
+| EL         | 0.00448185 | 0          |
+| EM         | 0.029624   | 0          |
+| EPL        | 0.00940096 | 0          |
+| ESLOL      | 0.0330127  | 0          |
+| GL         | 0.0097289  | 0          |
+| GLL        | 0.0179274  | 0          |
+| HC         | 0.0154132  | 0          |
+| HM         | 0.0177088  | 0          |
+| IC         | 0.00732401 | 0          |
+| LAS        | 0.027547   | 0          |
+| LCK        | 0.0532357  | 0          |
+| LCKC       | 0.0552033  | 0          |
+| LCO        | 0.0153039  | 0          |
+| LCS        | 0.0288588  | 0          |
+| LDL        | 0          | 0.527094   |
+| LEC        | 0.031373   | 0          |
+...
+| UL         | 0.0267818  | 0          |
+| VCS        | 0.0353083  | 0          |
+| VL         | 0.00961959 | 0          |
+| WLDs       | 0.0132269  | 0.00800493 |
+
 <iframe src="league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
 <iframe src="tvd_mar.html" width="800" height="600" frameBorder="0"></iframe>
+
+| side   |   False |   True |
+|:-------|--------:|-------:|
+| Blue   |     0.5 |    0.5 |
+| Red    |     0.5 |    0.5 |
 
 <iframe src="side_distribution_mcar.html" width="800" height="600" frameBorder="0"></iframe>
 
