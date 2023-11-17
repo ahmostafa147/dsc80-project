@@ -49,80 +49,22 @@ print(col_added.head().to_markdown(index=False))
 
 Univariate Charts
 
-
-```py
-more_kills_won = (col_added
-                  .query("result == 1 and has_more_kills == True")
-                  .shape[0] / 
-                  col_added
-                  .query("has_more_kills == True")
-                  .shape[0]
-                 )
-more_kills_lost = 1 - more_kills_won
-data = {'rate': [more_kills_won, more_kills_lost],
-        'Label': ['Had more kills and won', 'Had more kills but lost']}
-df = pd.DataFrame(data)
-fig = px.pie(df, values='rate', names='Label', title='Players winning rate when having more kills')
-fig.show()
-```
-<iframe src="chart.html" width="800" height="600" frameBorder="0"></iframe>
+<iframe src="piechart.html" width="800" height="600" frameBorder="0"></iframe>
 
 In order to increase our awareness of the data we have, we produced an interactive pie chart using plotly that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. As we can see, 79.4% of the players who had more kills won. This gives us insight about what our proportions would look like per position. It makes us expect that having more kills should have a big impact on your chances of winning.
 
-```py
-fig = (px.histogram(lol_data,
-                    x="kills",
-                    facet_col= "position",
-                    facet_row = "result",
-                    title="Kills Distribution Per Position",
-                    histnorm="probability density")
-      )
-fig.show()
-```
-<iframe src="plot2.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="histogram_distribution.html" width="800" height="600" frameBorder="0"></iframe>
 
 This histogram shows the distribution of kills counts per position for winning vs losing players. Generally winning players had more kills than losing players.
 
 Bivariate Chart
 
-```py
-prop_per_position_more = (col_added
-                     .query("has_more_kills == True and result == 1")
-                     .groupby("position")
-                     .size() / 
-                     col_added
-                     .groupby('position')
-                     .size()
-                    )
-prop_per_position_more.name = "Proportions"
-fig2 = px.bar(prop_per_position_more, title="Win Rate of Position with more Kills")
-fig2.update_layout(
-    legend=dict(title='Variable'),  # Add legend title
-    yaxis_title='Win Rate', # Add y-axis label
-)
-fig2.show()
-```
+<iframe src="more_kills_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
 This bar graph looks at the distribution of kills for each position. When result = 1, that player won the game. It appears that for the those who won games tend to have more kills than those who lost games. Support(<code class="language-plaintext highlighter-rouge">“sup”</code>) would normally defer kills to their teammates, and that is reflected as their distributions are closer to 0 than the other positions.
 
-```py
-prop_per_position_less = (col_added
-                          .query("has_more_kills == False and result == 1")
-                          .groupby("position")
-                          .size() / 
-                          col_added
-                          .groupby('position')
-                          .size()
-                         )
-observed_stat = (prop_per_position_more - prop_per_position_less)
-observed_stat.name = "Proportions"
-fig2 = px.bar(observed_stat, title="Increase in Win Rate of Position With More Kills vs Less Kills")
-fig2.update_layout(
-    legend=dict(title='Variable'),  # Add legend title
-    yaxis_title='Win Rate', # Add y-axis label
-)
-fig2.show()
-```
+<iframe src="increase_winrate_barchart.html" width="800" height="600" frameBorder="0"></iframe>
+
 
 This bar graph shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. One thing intriguing is that the support role is the only role that had a negative difference in winrate, which we would further invesitgate in our hypothesis testing.
 
@@ -134,6 +76,15 @@ NMAR Analysis
 Yes, we believe that many columns in our data are Not Missing At Random (NMAR) due to the way this data is collected. Each game has 12 rows: two sets of 5 rows for each of the team players and an additional row for each team’s summary statistics. Many stats are missing for the player rows and not missing for the team rows, and vice versa. This makes the missingness of the rows dependent on the type of columns (and therefore many of the other columns). However, this missingness is not missing by design because we cannot always infer one column’s missingness exactly from another in the columns that we had. 
 
 Furthermore, special individual statistics were recorded differently based on the league the game took place in. It appeared that some leagues did not record the individual kill statistics in rows for the players and not the teams. <code class="language-plaintext highlighter-rouge">“killsat15”</code>, one of the individual kill statistics, we speculate will have its missingness dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column based on this fact.
+
+<iframe src="league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
+
+<iframe src="tvd_mar.html" width="800" height="600" frameBorder="0"></iframe>
+
+<iframe src="side_distribution_mcar.html" width="800" height="600" frameBorder="0"></iframe>
+
+<iframe src="tvd_mcar.html" width="800" height="600" frameBorder="0"></iframe>
+
 
 The data we had in our hypothesis testing did not have any rows without values. <code class="language-plaintext highlighter-rouge">“kills”</code> were recorded in every single game for every single individual in the dataset, so we did not need to impute any data in order to complete the data for our hypothesis testing.
 
