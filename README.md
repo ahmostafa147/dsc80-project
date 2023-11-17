@@ -64,6 +64,8 @@ This bar graph shows the difference in winrate when having more kills than their
 
 Interesting Aggregates
 
+This groupby() highlights the mean number of dragons when teams lose or win. The first row is when the team loses and the second row is when the team wins. You can see the distribution between winning or losing with a particular soul. For instance you are much more likely to lose with "chemtechs" than win with it and you are more likely to win with "hextechs" than lose with them.
+
 |   result |     bot |     jng |     mid |     sup |     top |
 |---------:|--------:|--------:|--------:|--------:|--------:|
 |        0 | 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
@@ -74,9 +76,14 @@ Interesting Aggregates
 ## Assessment of Missingness
 
 NMAR Analysis
-Yes, we believe that many columns in our data are Not Missing At Random (NMAR) due to the way this data is collected. Each game has 12 rows: two sets of 5 rows for each of the team players and an additional row for each team’s summary statistics. Many stats are missing for the player rows and not missing for the team rows, and vice versa. This makes the missingness of the rows dependent on the type of columns (and therefore many of the other columns). However, this missingness is not missing by design because we cannot always infer one column’s missingness exactly from another in the columns that we had. 
+We believe that many columns in our data are Not Missing At Random (NMAR) due to the way this data is collected. Each game has 12 rows: two sets of 5 rows for each of the team players and an additional row for each team’s summary statistics. Many stats are missing for the player rows and not missing for the team rows, and vice versa. This makes the missingness of the rows dependent on the type of columns (and therefore many of the other columns). However, this missingness is not missing by design because we cannot always infer one column’s missingness exactly from another in the columns that we had. 
 
 Furthermore, special individual statistics were recorded differently based on the league the game took place in. It appeared that some leagues did not record the individual kill statistics in rows for the players and not the teams. <code class="language-plaintext highlighter-rouge">“killsat15”</code>, one of the individual kill statistics, we speculate will have its missingness dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column based on this fact.
+
+Missingness Dependency
+Missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does depend on <code class="language-plaintext highlighter-rouge">“league”</code> We wanted to determine if <code class="language-plaintext highlighter-rouge">“league”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were Missing at Random or Missing Completely at Random.
+
+Here is the observed distribution of missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> for each <code class="language-plaintext highlighter-rouge">“league”</code> where False means it is missing and True means it is present:
 
 | league     |      False |       True |
 |:-----------|-----------:|-----------:|
@@ -131,7 +138,21 @@ Furthermore, special individual statistics were recorded differently based on th
 
 <iframe src="assets/league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
+This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. Two leagues <code class="language-plaintext highlighter-rouge">“LPL”</code> and <code class="language-plaintext highlighter-rouge">“LDL”</code> clearly have more True values, meaning <code class="language-plaintext highlighter-rouge">“killsat15”</code> is missing for those two leagues significantly more than the other leagues.
+
+Our observed total variation distance (TVD) was: .992
+
+Our p-value was: 0.0
+
+This would mean that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column, making it Missing At Random (MAR) with dependency on <code class="language-plaintext highlighter-rouge">“league”</code>.
+
+Here is the empirical distribution of the test statistic:
+
 <iframe src="assets/tvd_mar.html" width="800" height="600" frameBorder="0"></iframe>
+
+The missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does not depend on <code class="language-plaintext highlighter-rouge">“side”</code> We wanted to determine if <code class="language-plaintext highlighter-rouge">“side”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were Missing at Random or Missing Completely at Random.
+
+Here is the distribution of the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code>:
 
 | side   |   False |   True |
 |:-------|--------:|-------:|
@@ -139,6 +160,16 @@ Furthermore, special individual statistics were recorded differently based on th
 | Red    |     0.5 |    0.5 |
 
 <iframe src="assets/side_distribution_mcar.html" width="800" height="600" frameBorder="0"></iframe>
+
+This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. The missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is perfectly split between the two sides <code class="language-plaintext highlighter-rouge">“Blue”</code> and <code class="language-plaintext highlighter-rouge">“Red”</code>.
+
+Our observed total variation distance (TVD) was: 0.0
+
+Our p-value was: 1.0
+
+This would mean that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is not dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column.
+
+Here is the empirical distribution of the test statistic:
 
 <iframe src="assets/tvd_mcar.html" width="800" height="600" frameBorder="0"></iframe>
 
