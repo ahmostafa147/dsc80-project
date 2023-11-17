@@ -42,8 +42,8 @@ blue = lol_data.sort_values(by=["gameid", "position"]).query("side == 'Blue'")
 red["has_more_kills"] = np.array(red['kills']) > np.array(blue['kills'])
 blue["has_more_kills"] = np.array(red['kills']) < np.array(blue['kills'])
 col_added = red.merge(blue, how='outer').sort_values(by=["gameid", "position"])
-print(col_added.head().to_markdown(index=False))
 ```
+print(col_added.head().to_markdown(index=False))
 
 Univariate Charts
 
