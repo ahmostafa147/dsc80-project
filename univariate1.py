@@ -16,3 +16,6 @@ fig = px.pie(df, values='rate', names='Label', title='Players winning rate when 
 
 # Save the Plotly figure as an HTML file
 fig.write_html("plot.html")
+
+with open("chart.html") as f:
+  chart_html = f.read()
