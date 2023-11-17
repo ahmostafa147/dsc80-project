@@ -1,6 +1,6 @@
 # League of Legends Having More kills Than Lane Oponnent Winrate Analysis
 
-by Ahmed Mostafa and Ethan Vo (ahmostafa147, etvo@ucsd.edu)
+by Ahmed Mostafa and Ethan Vo (ahmostafa@ucsd.edu, etvo@ucsd.edu)
 
 ---
 
