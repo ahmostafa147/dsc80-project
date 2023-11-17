@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
-# ... (previous code)
-
 # Calculate rates for more kills won and lost
 more_kills_won = (col_added.query("result == 1 and has_more_kills == True").shape[0] / col_added.query("has_more_kills == True").shape[0])
 more_kills_lost = 1 - more_kills_won
