@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Players Winning Rate</title>
+    <script src="https://cdn.plot.ly/plotly-2.6.3.min.js"></script>
+</head>
+<body>
+    <div id="plotly-chart" style="height:100%; width:100%;"></div>
+
+    <script type="text/javascript">
+        // Load the Plotly chart from the generated plot.html file
+        Plotly.d3.text("plot.html", function(error, data) {
+            if (error) throw error;
+
+            var graph = document.getElementById('plotly-chart');
+            graph.innerHTML = data;
+        });
+    </script>
+</body>
+</html>
