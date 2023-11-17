@@ -14,8 +14,8 @@ The columns we are interested in to answer, “Which player position, when achie
 
 Descriptions of Columns
 
-* "result" is True when the team won the game and False otherwise
-* “Kills” is the number of kills that particular player got in that game
+* <code class="language-plaintext highlighter-rouge">"result"</code> is True when the team won the game and False otherwise
+* <code class="language-plaintext highlighter-rouge">"kills"</code> is the number of kills that particular player got in that game
 * “gameid” is the identification number of the particular game from that tournament. This is unique for all games in the dataset
 * “datacompleteness” is an indicator of whether or not the data is complete for that row
 * “side” is the side that player played on. This can either be red or blue (corresponding to the red and blue sides on the map for League of Legends)
