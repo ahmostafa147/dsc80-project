@@ -19,15 +19,14 @@ Descriptions of Columns
 * <code class="language-plaintext highlighter-rouge">"side"</code> is the side that player played on. This can either be red or blue (corresponding to the red and blue sides on the map for League of Legends)
 * <code class="language-plaintext highlighter-rouge">“position”</code> is the position or role the player played. This can be “top”, “mid”, “bot”, “jng”, or “sup” for the five positions in League of Legends.
 * <code class="language-plaintext highlighter-rouge">“result”</code> is whether or not the team won. It will be 1 if the player’s team won or 0 for a loss.
-* <code class="language-plaintext highlighter-rouge">“has_more_kills”</code> states whether or not the player has more kills than their lane opponent. It is a boolean that returns either “True” or “False”.
 * <code class="language-plaintext highlighter-rouge">"kills"</code> is the number of kills that particular player got in that game
 * <code class="language-plaintext highlighter-rouge">“killsat15”</code> is the number of kills a player got within the first 15 minutes of the particular game
-
+* <code class="language-plaintext highlighter-rouge">“has_more_kills”</code> states whether or not the player has more kills than their lane opponent. It is a boolean that returns either “True” or “False”.
 ---
 
 ## Data Cleaning and Exploratory Data Analysis
 
-We first decided to only keep the relevant columns: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, <code class="language-plaintext highlighter-rouge">“killsat15”</code>, and <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, as they were relevant to our question. We cleaned the data by removing the rows that contain information about the team. We did this by removing the rows that had "team" value in the position column. We then added a new column to the DataFrame that identifies each row as whether it belongs to a position that had more kills than its counterpart in the opposing team. In order to create this column <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, we took the rows with the same <code class="language-plaintext highlighter-rouge">“gameid”</code> and <code class="language-plaintext highlighter-rouge">“position”</code> and compared the kills between the two sides. Our process is showed below:
+We first decided to only keep the columns relevant to our question: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, <code class="language-plaintext highlighter-rouge">“killsat15”</code>, and <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>. We cleaned the data by removing the rows that contain information about the team as we are comparing data at the players level not team level. We did this by removing the rows that had "team" as its entry in the <code class="language-plaintext highlighter-rouge">“position”</code> column. We then added a new column to the DataFrame that identifies each row as whether it belongs to a position that had more kills than its counterpart in the opposing team. In order to create this column, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, we took the rows with the same <code class="language-plaintext highlighter-rouge">“gameid”</code> and <code class="language-plaintext highlighter-rouge">“position”</code> and compared the kills between the two sides. Our result is showed below:
 
 | gameid             | league   | side   | position   |   result |   kills |   killsat15 | has_more_kills   |
 |:-------------------|:---------|:-------|:-----------|---------:|--------:|------------:|:-----------------|
@@ -39,32 +38,43 @@ We first decided to only keep the relevant columns: <code class="language-plain
 
 Univariate Charts
 
+In order to increase our awareness of the data we have, we produced an interactive pie chart using <code class="language-plaintext highlighter-rouge">“plotly”</code> that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. As we can see, 79.4% of the players who had more kills won. This finding made us expect that having more kills should have a big impact on your chances of winning.
+
 <iframe src="assets/piechart.html" width="800" height="600" frameBorder="0"></iframe>
 
-In order to increase our awareness of the data we have, we produced an interactive pie chart using plotly that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. As we can see, 79.4% of the players who had more kills won. This gives us insight about what our proportions would look like per position. It makes us expect that having more kills should have a big impact on your chances of winning.
+
+Then we decided to see the distribution of kill per position for players won vs lost. The distribution would allow us to compare the kills distribution for winning vs losing players in the same position. This further our understanding and awareness of the data and makes us have reasoned expectations. 
+The histogram below shows the distribution of kills counts per position for winning vs losing players.
 
 <iframe src="assets/histogram_distribution.html" width="800" height="600" frameBorder="0"></iframe>
 
-This histogram shows the distribution of kills counts per position for winning vs losing players. Generally winning players had more kills than losing players.
+As shown in the histogram, winning players generally had more kills than losing players. Though, there is an anomaly where it appears that support(<code class="language-plaintext highlighter-rouge">“sup”</code>) distributions are closer to 0 than the other positions. This could be explained that support positions would normally defer kills to their teammates and focus on supporting them rather than killing.
 
+---
 Bivariate Chart
+
+After expanding our knowledge and our understanding of the data, we started our analysis by plotting this bar graph that shows the winrate when having more kills than their lane opponent. 
 
 <iframe src="assets/more_kills_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
-This bar graph looks at the distribution of kills for each position. When result = 1, that player won the game. It appears that for the those who won games tend to have more kills than those who lost games. Support(<code class="language-plaintext highlighter-rouge">“sup”</code>) would normally defer kills to their teammates, and that is reflected as their distributions are closer to 0 than the other positions.
+As we anticipated, the support position have relatively lower win rate when having more kills compared to other position.
+
+After that, we got our test statistic by plotting this bar graph that shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. 
 
 <iframe src="assets/increase_win_rate_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
-This bar graph shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. One thing intriguing is that the support role is the only role that had a negative difference in winrate, which we would further invesitgate in our hypothesis testing.
+One intriguing thing is that the support role actually have a negative difference in winrate, which means that when support has more kills it is less likely that the team wins. This motivated us to further invesitgate this and verify it in our hypothesis testing.
 
 Interesting Aggregates
 
-This groupby() highlights the mean number of kills each position has when they lose or win. The first row is when the team loses and the second row is when the team wins. You can see the distribution of kills between losing and winning. Across all roles the winners on average have a higher number of kills than if they lose.
+While we were in the analysis process we decided to look over an interesting aggregate which is the mean kills per position when the position won and when the position lost. To calculate the means, we made a pivot table where the positions are the columns and the rows represent the winning status.
 
 |   result |     bot |     jng |     mid |     sup |     top |
 |---------:|--------:|--------:|--------:|--------:|--------:|
 |        0 | 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
 |        1 | 6.27757 | 3.46807 | 4.85156 | 1.01652 | 3.5129  |
+
+Across all roles the winners on average have a higher number of kills than if they lose.
 
 ---
 
