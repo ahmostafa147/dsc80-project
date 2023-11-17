@@ -21,7 +21,8 @@ Descriptions of Columns
 * <code class="language-plaintext highlighter-rouge">“result”</code> is whether or not the team won. It will be 1 if the player’s team won or 0 for a loss.
 * <code class="language-plaintext highlighter-rouge">"kills"</code> is the number of kills that particular player got in that game
 * <code class="language-plaintext highlighter-rouge">“killsat15”</code> is the number of kills a player got within the first 15 minutes of the particular game
-* <code class="language-plaintext highlighter-rouge">“has_more_kills”</code> states whether or not the player has more kills than their lane opponent. It is a boolean that returns either “True” or “False”
+* <code class="language-plaintext highlighter-rouge">“has_more_kills”</code> states whether or not the player has more kills than their lane opponent. It is a boolean that returns either “True” or “False”.
+
 ---
 
 ## Data Cleaning and Exploratory Data Analysis
