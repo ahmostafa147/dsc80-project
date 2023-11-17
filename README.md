@@ -65,7 +65,7 @@ df = pd.DataFrame(data)
 fig = px.pie(df, values='rate', names='Label', title='Players winning rate when having more kills')
 fig.show()
 ```
-<iframe src="univariate_chart1.py" width=800 height=600 frameBorder=0></iframe>
+<iframe src="plot.html" width=800 height=600 frameBorder=0></iframe>
 
 In order to increase our awareness of the data we have, we produced an interactive pie chart using plotly that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. As we can see, 79.4% of the players who had more kills won. This gives us insight about what our proportions would look like per position. It makes us expect that having more kills should have a big impact on your chances of winning.
 
@@ -79,6 +79,7 @@ fig = (px.histogram(lol_data,
       )
 fig.show()
 ```
+<iframe src="plot2.html" width=800 height=600 frameBorder=0></iframe>
 
 This histogram shows the distribution of kills counts per position for winning vs losing players. Generally winning players had more kills than losing players.
 
