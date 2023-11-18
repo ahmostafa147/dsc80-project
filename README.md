@@ -186,7 +186,7 @@ Here is the empirical distribution of the test statistic:
 
 The data used in our hypothesis testing did not have any rows without values. <code class="language-plaintext highlighter-rouge">“kills”</code> were recorded in every single game for each player in the dataset, so we did not need to impute or drop any data in order to complete the data for our hypothesis testing.
 
-**Null Hypothesis**: The proportion of support position winning and having higher kills is equal to the proportion of support position winning and having less kills.
+**Null Hypothesis**: The proportion of support position winning and having higher kills is equal to the proportion of support position winning and having less kills.<br>
 **Alternative Hypothesis**: The proportion of support position winning and having higher kills is less than the proportion of support position winning and having less kills.
 
 Our null and alternative hypotheses were driven from our observation of the change in win rate for the support position based on whether they had more kills or not. Our test Statistic will be the difference between the proportion of games won while having more kills and the proportion of the games won while having less kills. We will be testing on a significance level of 5%. The cutoff was chosen because it is the most used in the analysis field.
@@ -194,7 +194,7 @@ Our null and alternative hypotheses were driven from our observation of the chan
 Result:
 After running 100,000 simulations and checking probability of the observation in the data occurance, we got a p-value of 0.
 
-##### Conclusion: 
+#### Conclusion: 
 Our test was statistically significant, so we reject the null hypothesis. The observation we saw in our data did not happen due to random chance, so we conclude that support having more kills may be detrimental to the team winning the game.
 
 
