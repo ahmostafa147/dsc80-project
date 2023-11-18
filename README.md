@@ -1,4 +1,4 @@
-# League of Legends: Kills vs Win Rate Analysis
+# League of Legends: Kills Analysis
 
 by Ahmed Mostafa and Ethan Vo (ahmostafa@ucsd.edu, etvo@ucsd.edu)
 
