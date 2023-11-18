@@ -88,9 +88,9 @@ Furthermore, special individual statistics were recorded differently based on th
 
 Missingness Dependency
 
-Missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does depend on <code class="language-plaintext highlighter-rouge">“league”</code>. We wanted to determine if <code class="language-plaintext highlighter-rouge">“league”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were missing at random (MAR) or missing completely at random (MCAR).
+Looking through the data, we were interesting in assessing the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code>  and verifying whether it depends on the <code class="language-plaintext highlighter-rouge">“league”</code> or not. This would help us identify whether <code class="language-plaintext highlighter-rouge">“killsat15”</code> is missing at random (MAR) or missing completely at random (MCAR).
 
-Here is the observed distribution of missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> for each <code class="language-plaintext highlighter-rouge">“league”</code>, where False means that it is missing, and True means it is present:
+We started by getting and plotting the distribution of missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> for each <code class="language-plaintext highlighter-rouge">“league”</code>, where False means that it is missing, and True means it is present:
 
 <iframe src="assets/league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
@@ -145,15 +145,15 @@ Here is the observed distribution of missingness of <code class="language-plaint
 | VL         | 0.00961959 | 0          |
 | WLDs       | 0.0132269  | 0.00800493 |
 
-This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. Two leagues <code class="language-plaintext highlighter-rouge">“LPL”</code> and <code class="language-plaintext highlighter-rouge">“LDL”</code> clearly have more True values, meaning <code class="language-plaintext highlighter-rouge">“killsat15”</code> is missing for those two leagues significantly more than the other leagues.
+As we can see from the plot, two leagues <code class="language-plaintext highlighter-rouge">“LPL”</code> and <code class="language-plaintext highlighter-rouge">“LDL”</code> clearly have more True values, which means <code class="language-plaintext highlighter-rouge">“killsat15”</code> is missing for those two leagues significantly more than the other leagues.
+
+We continued with our test and ran a permutation test with total variation distance (TVD) as the test statistic and a significance level of 5%.
 
 Our observed total variation distance (TVD) was: .992
 
-Our p-value was: 0.0
+After running the permutation test, we got a p-value of 0.0, so we concluded that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column, making the missingness type for <code class="language-plaintext highlighter-rouge">“killsat15”</code> missing at random (MAR) with dependency on <code class="language-plaintext highlighter-rouge">“league”</code>.
 
-So we conclude that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column, making the missingness type missing at random (MAR) with dependency on <code class="language-plaintext highlighter-rouge">“league”</code>.
-
-Here is the empirical distribution of the test statistic:
+Here is the empirical distribution of the TVDs:
 
 <iframe src="assets/tvd_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
