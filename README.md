@@ -38,7 +38,7 @@ We first decided to only keep the columns relevant to our question: <code class
 
 Univariate Charts
 
-In order to increase our awareness of the data, we produced an interactive pie chart using <code class="language-plaintext highlighter-rouge">“plotly”</code> that reprensents the percentage of players who had more kills and won vs players who had more kills but lost. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. We can see that 79.4% of the players who had more kills won. This finding made us expect that having more kills should impact on chances of victory.
+In order to increase our awareness of the data, we produced an interactive pie chart using <code class="language-plaintext highlighter-rouge">“plotly”</code> that reprensents the percentage of players who had more kills and won vs players who had more kills but lost. This visualization is helpful to give us insight of what to expect from our proportions that represent the impact of having more kills. We can see that 79.4% of the players who had more kills won. This finding made us expect that having more kills should impact on chances of victory.
 
 <iframe src="assets/piechart.html" width="800" height="600" frameBorder="0"></iframe>
 
