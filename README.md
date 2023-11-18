@@ -43,7 +43,7 @@ In order to increase our awareness of the data, we produced an interactive pie c
 <iframe src="assets/piechart.html" width="800" height="600" frameBorder="0"></iframe>
 
 
-Then, we decided to see the distribution of kill per position for players won vs lost. The distribution would allow us to compare the kills distribution for winning vs losing players in the same position. This furthers our understanding and awareness of the data and back our expectations with reason. 
+Then, we decided to see the distribution of kills per position for players won vs lost. The distribution would allow us to compare the kills distribution for winning vs losing players in the same position. This furthers our understanding and awareness of the data and back our expectations with reason. 
 The histogram below shows the distribution of kills counts per position for winning vs losing players.
 
 <iframe src="assets/histogram_distribution.html" width="800" height="600" frameBorder="0"></iframe>
