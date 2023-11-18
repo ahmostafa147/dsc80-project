@@ -10,7 +10,7 @@ Our dataset is on all of the professional League of Legends games that have take
 
 League of Legends players have always debated on which position needs kills to help the team win. As players continue to play League of Legends and try out the different positions on a team, players may get curious as to which position has the greatest influence on the game with more kills. Through this experiment they can know which position needs more kills than their lane opponent the most to help their team win.
 
-The columns we are interested in to answer, “Which player position, when achieving more kills than their lane opponent has the greatest impact on boosting the overall win rate?” are: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, and <code class="language-plaintext highlighter-rouge">“killsat15”</code>. These are the columns from the dataset that are relevant to our proposed question, as they provide us with information about the position, the side they belong to, whether the position won or lost, and the number of kills done by each position. In the process of cleaning, we removed rows that belong to the team, as they were irrelevant to our analysis, and sorted the data to have each position next to its opponent for easier visual comparison. After that, we decided to add a boolean column, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, where True means the position had more kills and False otherwise. The column was added to simplify the analysis and comparison process. After cleaning, our dataframe had 107720 rows, representing 10772 games, and 8 columns.
+The columns we are interested in to answer, “Which player position, when achieving more kills than their lane opponent has the greatest impact on boosting the overall win rate?” are: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, and <code class="language-plaintext highlighter-rouge">“killsat15”</code>. These are the columns from the dataset that are relevant to our proposed question, as they provide us with information about the position, the side they belong to, whether the position won or lost, and the number of kills done by each position. In the process of cleaning, we removed rows that belong to the team, as they were irrelevant to our analysis, and sorted the data to have each position next to its opponent for easier visual comparison. After that, we decided to add the boolean column, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, where True means the position had more kills, and False otherwise. The column was added to simplify the analysis and comparison process. After cleaning, our dataframe had 107720 rows, representing 10772 games, and 8 columns.
 
 Descriptions of Columns
 
@@ -26,7 +26,7 @@ Descriptions of Columns
 
 ## Data Cleaning and Exploratory Data Analysis
 
-We first decided to only keep the columns relevant to our question: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, <code class="language-plaintext highlighter-rouge">“killsat15”</code>, and <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>. We cleaned the data by removing the rows that contain information about the team as we are comparing data at the players level not team level. We did this by removing the rows that had "team" as its entry in the <code class="language-plaintext highlighter-rouge">“position”</code> column. We then added a new column to the DataFrame that identifies each row as whether it belongs to a position that had more kills than its counterpart in the opposing team. In order to create this column, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, we took the rows with the same <code class="language-plaintext highlighter-rouge">“gameid”</code> and <code class="language-plaintext highlighter-rouge">“position”</code> and compared the kills between the two sides. Our result is showed below:
+We first decided to only keep the columns relevant to our question: <code class="language-plaintext highlighter-rouge">“gameid”</code>, <code class="language-plaintext highlighter-rouge">“league”</code>, <code class="language-plaintext highlighter-rouge">“side”</code>, <code class="language-plaintext highlighter-rouge">“position”</code>, <code class="language-plaintext highlighter-rouge">“result”</code>, <code class="language-plaintext highlighter-rouge">“kills”</code>, <code class="language-plaintext highlighter-rouge">“killsat15”</code>, and <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>. We cleaned the data by removing the rows that contain information about the team, as we are comparing data at the scope of the players, not the teams. We did this by removing the rows that had "team" as its entry in the <code class="language-plaintext highlighter-rouge">“position”</code> column. We then added a new column to the DataFrame that identifying whether each row belongs to a position that had more kills than its counterpart in the opposing team. In order to create this column, <code class="language-plaintext highlighter-rouge">“has_more_kills”</code>, we took the rows with the same <code class="language-plaintext highlighter-rouge">“gameid”</code> and <code class="language-plaintext highlighter-rouge">“position”</code>, and compared the kills between the two sides. Our result is showed below:
 
 | gameid             | league   | side   | position   |   result |   kills |   killsat15 | has_more_kills   |
 |:-------------------|:---------|:-------|:-----------|---------:|--------:|------------:|:-----------------|
@@ -38,57 +38,61 @@ We first decided to only keep the columns relevant to our question: <code class
 
 Univariate Charts
 
-In order to increase our awareness of the data we have, we produced an interactive pie chart using <code class="language-plaintext highlighter-rouge">“plotly”</code> that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. As we can see, 79.4% of the players who had more kills won. This finding made us expect that having more kills should have a big impact on your chances of winning.
+In order to increase our awareness of the our data, we produced an interactive pie chart using <code class="language-plaintext highlighter-rouge">“plotly”</code> that reprensents the percentage of players who had more kills and won vs players who had more kills but won. This visualization is helpful to give us insight of what to expect from our proportions that represents the impact of having more kills. We can see that 79.4% of the players who had more kills won. This finding made us expect that having more kills should impact on chances of victory.
 
 <iframe src="assets/piechart.html" width="800" height="600" frameBorder="0"></iframe>
 
 
-Then we decided to see the distribution of kill per position for players won vs lost. The distribution would allow us to compare the kills distribution for winning vs losing players in the same position. This further our understanding and awareness of the data and makes us have reasoned expectations. 
+Then, we decided to see the distribution of kill per position for players won vs lost. The distribution would allow us to compare the kills distribution for winning vs losing players in the same position. This furthers our understanding and awareness of the data and back our expectations with reason. 
 The histogram below shows the distribution of kills counts per position for winning vs losing players.
 
 <iframe src="assets/histogram_distribution.html" width="800" height="600" frameBorder="0"></iframe>
 
-As shown in the histogram, winning players generally had more kills than losing players. Though, there is an anomaly where it appears that support(<code class="language-plaintext highlighter-rouge">“sup”</code>) distributions are closer to 0 than the other positions. This could be explained that support positions would normally defer kills to their teammates and focus on supporting them rather than killing.
+As shown in the histogram, winning players generally had more kills than losing players. There is an anomaly where it appears that support(<code class="language-plaintext highlighter-rouge">“sup”</code>) distributions are closer to 0 than they are to the other positions. This could be explained by support positions normally defering kills to their teammates and focussing on supporting them rather than killing.
 
 ---
 Bivariate Chart
 
-After expanding our knowledge and our understanding of the data, we started our analysis by plotting this bar graph that shows the winrate when having more kills than their lane opponent. 
+After expanding our knowledge and understanding of the data, we started our analysis by plotting the following bar graph, which shows the win rate when the player has more kills than their lane opponent. 
 
 <iframe src="assets/more_kills_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
-As we anticipated, the support position have relatively lower win rate when having more kills compared to other position.
+As we anticipated, the support position has a relatively lower win rate when the player has more kills compared to their counterpart on the opposite team.
 
-After that, we got our test statistic by plotting this bar graph that shows the difference in winrate when having more kills than their lane opponent versus having less kills than their lane opponenet. 
+After that, we got our test statistic by plotting the following bar graph, which shows the difference in win rate when having more kills than their lane opponent, versus having less kills. 
 
 <iframe src="assets/increase_win_rate_barchart.html" width="800" height="600" frameBorder="0"></iframe>
 
-One intriguing thing is that the support role actually have a negative difference in winrate, which means that when support has more kills it is less likely that the team wins. This motivated us to further invesitgate this and verify it in our hypothesis testing.
+One intriguing observation is that the support role actually has a negative difference in win rate, which means that when support has more kills, it is less likely that the team wins. This motivated us to further invesitgate and verify our observation in our hypothesis testing.
 
 Interesting Aggregates
 
-While we were in the analysis process we decided to look over an interesting aggregate which is the mean kills per position when the position won and when the position lost. To calculate the means, we made a pivot table where the positions are the columns and the rows represent the winning status.
+While we were in the analysis process, we decided to look over an interesting aggregate, which is the mean kills per position when the position won and when the position lost. To calculate the means, we made a pivot table where the positions are the columns and the winning statuses are the rows.
 
 |   result |     bot |     jng |     mid |     sup |     top |
 |---------:|--------:|--------:|--------:|--------:|--------:|
 |        0 | 2.72391 | 1.80124 | 2.27191 | 0.58225 | 1.70358 |
 |        1 | 6.27757 | 3.46807 | 4.85156 | 1.01652 | 3.5129  |
 
-Across all roles the winners on average have a higher number of kills than if they lose.
+Across all roles, the players that win on average have a higher number of kills than if they lose.
 
 ---
 
 ## Assessment of Missingness
 
 NMAR Analysis
-We believe that many columns in our data are Not Missing At Random (NMAR) due to the way this data is collected. Each game has 12 rows: two sets of 5 rows for each of the team players and an additional row for each team’s summary statistics. Many stats are missing for the player rows and not missing for the team rows, and vice versa. This makes the missingness of the rows dependent on the type of columns (and therefore many of the other columns). However, this missingness is not missing by design because we cannot always infer one column’s missingness exactly from another in the columns that we had. 
 
-Furthermore, special individual statistics were recorded differently based on the league the game took place in. It appeared that some leagues did not record the individual kill statistics in rows for the players and not the teams. <code class="language-plaintext highlighter-rouge">“killsat15”</code>, one of the individual kill statistics, we speculate will have its missingness dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column based on this fact.
+We believe that many columns in our data are not missing at random (NMAR) due to the way this data is recorded. Each game has 12 rows: two sets of 5 rows for each of the team players and an additional row for each team’s summary statistics. Many statistics are missing for the player rows and not missing for the team rows, and vice versa. This makes the missingness of the rows dependent on the type of columns (and therefore many of the other columns). However, this missingness is not missing by design because we cannot always infer one column’s missingness exactly from another in the columns that we have.
+
+Furthermore, special individual statistics were recorded differently based on the league the game took place in. It appeared that some leagues did not record the individual kill statistics in rows for the players, only for the teams. <code class="language-plaintext highlighter-rouge">“killsat15”</code>, one of the individual kill statistics, we speculate will have its missingness dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column based on this fact.
 
 Missingness Dependency
-Missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does depend on <code class="language-plaintext highlighter-rouge">“league”</code> We wanted to determine if <code class="language-plaintext highlighter-rouge">“league”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were Missing at Random or Missing Completely at Random.
 
-Here is the observed distribution of missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> for each <code class="language-plaintext highlighter-rouge">“league”</code> where False means it is missing and True means it is present:
+Missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does depend on <code class="language-plaintext highlighter-rouge">“league”</code>. We wanted to determine if <code class="language-plaintext highlighter-rouge">“league”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were missing at random (MAR) or missing completely at random (MCAR).
+
+Here is the observed distribution of missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> for each <code class="language-plaintext highlighter-rouge">“league”</code>, where False means that it is missing, and True means it is present:
+
+<iframe src="assets/league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
 | league     |      False |       True |
 |:-----------|-----------:|-----------:|
@@ -141,21 +145,19 @@ Here is the observed distribution of missingness of <code class="language-plaint
 | VL         | 0.00961959 | 0          |
 | WLDs       | 0.0132269  | 0.00800493 |
 
-<iframe src="assets/league_distribution_mar.html" width="800" height="600" frameBorder="0"></iframe>
-
 This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. Two leagues <code class="language-plaintext highlighter-rouge">“LPL”</code> and <code class="language-plaintext highlighter-rouge">“LDL”</code> clearly have more True values, meaning <code class="language-plaintext highlighter-rouge">“killsat15”</code> is missing for those two leagues significantly more than the other leagues.
 
 Our observed total variation distance (TVD) was: .992
 
 Our p-value was: 0.0
 
-This would mean that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column, making it Missing At Random (MAR) with dependency on <code class="language-plaintext highlighter-rouge">“league”</code>.
+So we conclude that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column, making the missingness type missing at random (MAR) with dependency on <code class="language-plaintext highlighter-rouge">“league”</code>.
 
 Here is the empirical distribution of the test statistic:
 
 <iframe src="assets/tvd_mar.html" width="800" height="600" frameBorder="0"></iframe>
 
-The missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does not depend on <code class="language-plaintext highlighter-rouge">“side”</code> We wanted to determine if <code class="language-plaintext highlighter-rouge">“side”</code> and <code class="language-plaintext highlighter-rouge">“killsat15”</code> were Missing at Random or Missing Completely at Random.
+We also wanted to determine whether <code class="language-plaintext highlighter-rouge">“killsat15”</code> missingness depend on <code class="language-plaintext highlighter-rouge">“side”</code> or not.
 
 Here is the distribution of the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code>:
 
@@ -166,35 +168,34 @@ Here is the distribution of the missingness of <code class="language-plaintext h
 
 <iframe src="assets/side_distribution_mcar.html" width="800" height="600" frameBorder="0"></iframe>
 
-This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. The missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is perfectly split between the two sides <code class="language-plaintext highlighter-rouge">“Blue”</code> and <code class="language-plaintext highlighter-rouge">“Red”</code>.
+This shows the distribution of missingness for <code class="language-plaintext highlighter-rouge">“killsat15”</code> and their respective means. The missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is perfectly split between the two sides, <code class="language-plaintext highlighter-rouge">“Blue”</code> and <code class="language-plaintext highlighter-rouge">“Red”</code>.
 
 Our observed total variation distance (TVD) was: 0.0
 
 Our p-value was: 1.0
 
-This would mean that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> is not dependent on the <code class="language-plaintext highlighter-rouge">“league”</code> column.
+This drove us to the conclusion that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does not depend on the <code class="language-plaintext highlighter-rouge">“side”</code> column.
 
 Here is the empirical distribution of the test statistic:
 
 <iframe src="assets/tvd_mcar.html" width="800" height="600" frameBorder="0"></iframe>
 
-
-The data we had in our hypothesis testing did not have any rows without values. <code class="language-plaintext highlighter-rouge">“kills”</code> were recorded in every single game for every single individual in the dataset, so we did not need to impute any data in order to complete the data for our hypothesis testing.
-
 ---
 
 ## Hypothesis Testing
 
-**Null Hypothesis**: The proportion of **support** position winning and having higher kills is equal to the proportion of support position winning and having less kills.
-**Alternative Hypothesis**: The proportion of **support** position winning and having higher kills is less than the proportion of support position winning and having less kills.
-Test Statistic: We will be using the proportion of games won.
-* We chose to use proportions because we are looking at has_more_kills influence on the winrate of a player.
-Significance Level: 5% (0.05)
-* We chose this significance level because it is the standard
-p-value: 0
-* We did 10,000 simulations
+The data used in our hypothesis testing did not have any rows without values. <code class="language-plaintext highlighter-rouge">“kills”</code> were recorded in every single game for each player in the dataset, so we did not need to impute or drop any data in order to complete the data for our hypothesis testing.
 
-Conclusion: Since the p value is 0, we reject the null hypothesis. Our observations is not consistent with the hypothesis that the change in win rate for supports with more kills than their lane opponents is less than 0. We believe this means that supports having more kills may be detrimental to the team winning the game.
+**Null Hypothesis**: The proportion of support position winning and having higher kills is equal to the proportion of support position winning and having less kills.
+**Alternative Hypothesis**: The proportion of support position winning and having higher kills is less than the proportion of support position winning and having less kills.
+
+Our null and alternative hypotheses were driven from our observation of the change in win rate for the support position based on whether they had more kills or not. Our test Statistic will be the difference between the proportion of games won while having more kills and the proportion of the games won while having less kills. We will be testing on a significance level of 5%. The cutoff was chosen because it is the most used in the analysis field.
+
+Result:
+After running 100,000 simulations and checking probability of the observation in the data occurance, we got a p-value of 0.
+
+##### Conclusion: 
+Our test was statistically significant, so we reject the null hypothesis. The observation we saw in our data did not happen due to random chance, so we conclude that support having more kills may be detrimental to the team winning the game.
 
 
 ---
