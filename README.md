@@ -176,7 +176,7 @@ Our p-value was: 1.0
 
 This drove us to the conclusion that the missingness of <code class="language-plaintext highlighter-rouge">“killsat15”</code> does not depend on the <code class="language-plaintext highlighter-rouge">“side”</code> column.
 
-Here is the empirical distribution of the test statistic:
+Here is the empirical distribution of the TVDs:
 
 <iframe src="assets/tvd_mcar.html" width="800" height="600" frameBorder="0"></iframe>
 
